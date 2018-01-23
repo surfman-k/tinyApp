@@ -29,11 +29,16 @@ app.get("/urls/:id", (req, res) => {
 	res.render("urls_show", templateVars);
 });
 
-app.post("/urls", (req, res) => {
-	console.log(req.body); 
+app.post("/urls", (req, res) => { 
 	urlDatabase[uniqueId] = req.body.longURL;
 	console.log(urlDatabase);
 	res.redirect('http://localhost:8080/urls/' + uniqueId);  
+});
+
+app.post("/urls/:id/delete", (req, res) => { 
+	delete urlDatabase[req.params.id];
+	console.log(urlDatabase);
+	res.redirect('http://localhost:8080/urls/');  
 });
 
 app.get("/u/:shortURL", (req, res) => {

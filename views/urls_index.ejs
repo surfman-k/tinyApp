@@ -11,7 +11,10 @@
 
 	<ul>
 		<% for(let key in urls){%>
-			<p><a href="/urls/<%= key %>"> <%= key %> </a> : <%= urls[key] %> </p>
+			<li><a href="/urls/<%= key %>"> <%= key %> </a> : <%= urls[key] %>  
+				<form method="POST" action="/urls/<%= key %>/delete"><button type="submit">Delete</button></form>
+			</li>
+
 		<% } %>
    		 
    		 <p><a href="/urls/new"> Make A New Short URL! </a></p>
