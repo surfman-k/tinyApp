@@ -10,7 +10,11 @@
 </header>
 
 
-	<p> <%= fullURL%> <%= shortURL %> </p>
+	<h2> Short URL: <%= shortURL %> </h2>
+	<form method="POST" action="/urls/<%= shortURL%>">
+		<input id="currentURL" type="text" name="currentURL" placeholder="<%= fullURL%>" style="width: 300px">
+		<button type="submit">Update</button>
+	</form>
 
 
 
