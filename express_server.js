@@ -41,6 +41,12 @@ app.post("/urls/:id/delete", (req, res) => {
 	res.redirect('http://localhost:8080/urls/');  
 });
 
+app.post("/urls/:id", (req, res) => { 
+	urlDatabase[req.params.id] = req.body.currentURL;
+	console.log(urlDatabase);
+	res.redirect('http://localhost:8080/urls/');  
+});
+
 app.get("/u/:shortURL", (req, res) => {
   let longURL = urlDatabase[req.params.shortURL];
   console.log(longURL);
