@@ -30,8 +30,16 @@ app.get("/urls/:id", (req, res) => {
 });
 
 app.post("/urls", (req, res) => {
-	console.log(req.body);  // debug statement to see POST parameters
-	res.send("Ok");         // Respond with 'Ok' (we will replace this)
+	console.log(req.body); 
+	urlDatabase[uniqueId] = req.body.longURL;
+	console.log(urlDatabase);
+	res.redirect('http://localhost:8080/urls/' + uniqueId);  
+});
+
+app.get("/u/:shortURL", (req, res) => {
+  let longURL = urlDatabase[req.params.shortURL];
+  console.log(longURL);
+  res.redirect(longURL);
 });
 
 app.listen(PORT, () => {
@@ -45,7 +53,7 @@ function generateRandomString() {
 	for (let i = 0; i < 6; i++) {
 		result += chars[Math.floor(Math.random() * chars.length)];
 	}
-	console.log(result);
+	return(result);
 }
 
-generateRandomString();
+let uniqueId = generateRandomString();
