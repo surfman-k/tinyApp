@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+  <title>TinyApp</title>
+</head>
+<body>
+
+<header>
+<% include ./partials/_header %>
+</header>
+
+
+	<ul>
+		<% for(var key in urls){%>
+			<p><a href="/urls/<%= key %>"> <%= key %> </a> : <%= urls[key] %> </p>
+		<% } %>
+   		 
+   		 <p><a href="/urls/new"> Make A New Short URL! </a></p>
+  	</ul>
+
+
+
+</body>
+</html>
