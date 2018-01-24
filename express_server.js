@@ -59,7 +59,8 @@ app.get("/register", (req, res) => {
 	res.render("urls_reg", templateVars);
 });
 
-app.post("/urls", (req, res) => { 
+app.post("/urls", (req, res) => {
+	let uniqueId = generateRandomString();
 	urlDatabase[uniqueId] = req.body.longURL;
 	console.log(urlDatabase);
 	res.redirect('http://localhost:8080/urls/' + uniqueId);  
@@ -89,6 +90,31 @@ app.post("/logout", (req, res) => {
 	res.redirect('http://localhost:8080/urls/');  
 });
 
+app.post("/register", (req, res) => { 
+	for (let key in users){
+		if(req.body.email === users[key].email){
+			res.status(400).send({ error: 'That email address is already registered!' });
+		}
+	}
+	if(req.body.email.length === 0){
+		res.status(400).send({ error: 'Make sure you enter a valid email!' });
+	}
+	else if(req.body.password.length === 0){
+		res.status(400).send({ error: 'Make sure you enter a valid password!' });
+	} 
+	else {
+	let uniqueId = generateRandomString();
+	users[uniqueId] = {};
+	users[uniqueId].id = uniqueId;
+	users[uniqueId].email = req.body.email;
+	users[uniqueId].password = req.body.password;
+	res.cookie('user-id', uniqueId);
+	console.log(req.cookies);
+	console.log(users);
+	res.redirect('http://localhost:8080/urls/');  
+	}
+});
+
 app.get("/u/:shortURL", (req, res) => {
   let longURL = urlDatabase[req.params.shortURL];
   console.log(longURL);
@@ -108,4 +134,3 @@ function generateRandomString() {
 	}
 	return(result);
 }
-let uniqueId = generateRandomString();
