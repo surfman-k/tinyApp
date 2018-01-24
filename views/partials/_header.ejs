@@ -2,12 +2,36 @@
     TinyApp!
 </title>
 
+
+
+
+<% if(!username) {%>
 <h1>
 	Welcome to TinyApp!	
 </h1>
+<% } else {%>
+<h1>
+	Welcome back to TinyApp <%= username%>!	
+</h1>
+<% } %>
+
+
+
+
+
+
+<% if(!username) {%>
 
 <form method="POST" action="/login">
 	<input id="username" type="text" name="username" placeholder="username" style="width: 300px">
 	<button type="submit">Submit</button>
 	<h2><%= username %></h2>
 </form>
+
+<% } else {%>
+
+<form method="POST" action="/logout">
+	<h3><%= username %> <button type="submit">Logout</button></h3>
+</form>
+
+<% } %>

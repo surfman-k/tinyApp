@@ -33,7 +33,10 @@ app.get("/urls/new", (req, res) => {
 });
 
 app.get("/urls/:id", (req, res) => {
-	let templateVars = { shortURL: req.params.id, fullURL: urlDatabase[req.params.id], username: req.cookies.name  };
+	let templateVars = { 
+		shortURL: req.params.id, 
+		fullURL: urlDatabase[req.params.id], 
+		username: req.cookies.name  };
 	res.render("urls_show", templateVars);
 });
 
@@ -57,6 +60,12 @@ app.post("/urls/:id", (req, res) => {
 
 app.post("/login", (req, res) => { 
 	res.cookie('name', req.body.username);
+	console.log(req.cookies);
+	res.redirect('http://localhost:8080/urls/');  
+});
+
+app.post("/logout", (req, res) => { 
+	res.clearCookie('name');
 	console.log(req.cookies);
 	res.redirect('http://localhost:8080/urls/');  
 });
