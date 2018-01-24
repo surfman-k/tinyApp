@@ -8,9 +8,22 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.set("view engine", "ejs");
 
-let urlDatabase = {
+const urlDatabase = {
 	"b2xVn2": "http://www.lighthouselabs.ca",
 	"9sm5xK": "http://www.google.com"
+};
+
+const users = { 
+  "userRandomID": {
+    id: "userRandomID", 
+    email: "user@example.com", 
+    password: "purple-monkey-dinosaur"
+  },
+ "user2RandomID": {
+    id: "user2RandomID", 
+    email: "user2@example.com", 
+    password: "dishwasher-funk"
+  }
 };
 
 app.get('/', function (req, res) {
@@ -38,6 +51,12 @@ app.get("/urls/:id", (req, res) => {
 		fullURL: urlDatabase[req.params.id], 
 		username: req.cookies.name  };
 	res.render("urls_show", templateVars);
+});
+
+app.get("/register", (req, res) => {
+	let templateVars = { urls: urlDatabase,
+	username: req.cookies.name };
+	res.render("urls_reg", templateVars);
 });
 
 app.post("/urls", (req, res) => { 
