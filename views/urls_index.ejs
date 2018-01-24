@@ -1,44 +1,7 @@
 <html lang="en">
 <head>
   <title>TinyApp</title>
-
-<style>
-button {
-   border: 1px solid #0a3c59;
-   background: #8a9ca8;
-   background: -webkit-gradient(linear, left top, left bottom, from(#cadeeb), to(#8a9ca8));
-   background: -webkit-linear-gradient(top, #cadeeb, #8a9ca8);
-   background: -moz-linear-gradient(top, #cadeeb, #8a9ca8);
-   background: -ms-linear-gradient(top, #cadeeb, #8a9ca8);
-   background: -o-linear-gradient(top, #cadeeb, #8a9ca8);
-   background-image: -ms-linear-gradient(top, #cadeeb 0%, #8a9ca8 100%);
-   padding: 3px 6px;
-   -webkit-border-radius: 9px;
-   -moz-border-radius: 9px;
-   border-radius: 9px;
-   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   text-shadow: #7ea4bd 0 1px 0;
-   color: #112b3d;
-   font-size: 11px;
-   font-family: helvetica, serif;
-   text-decoration: none;
-   vertical-align: middle;
-   }
-button:hover {
-   border: 1px solid #0a3c59;
-   text-shadow: #1e4158 0 1px 0;
-   background: #3e779d;
-   background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
-   background: -webkit-linear-gradient(top, #65a9d7, #3e779d);
-   background: -moz-linear-gradient(top, #65a9d7, #3e779d);
-   background: -ms-linear-gradient(top, #65a9d7, #3e779d);
-   background: -o-linear-gradient(top, #65a9d7, #3e779d);
-   background-image: -ms-linear-gradient(top, #65a9d7 0%, #3e779d 100%);
-   color: #fff;
-   }
-</style>  
+ 
 </head>
 <body>
 
@@ -47,29 +10,15 @@ button:hover {
 </header>
 
 
-	<table>
+<% for(let key in urls){%>
+	<form method="POST" action="/urls/<%= key %>/delete">
+		<%= urls[key] %>
+		<a href="/urls/<%= key %>"> <%= key %> </a>  
+		<button type="submit">Delete</button>
+	</form>
+<% } %>
 
-		<th></th>
-		<th></th>
-
-		<tr>
-		<% for(let key in urls){%>
-			<td>
-				<%= urls[key] %>
-			</td>
-			<td>
-				<a href="/urls/<%= key %>"> <%= key %> </a> 
-			</td>
-			<td>  
-				<form method="POST" action="/urls/<%= key %>/delete"><button type="submit">Delete</button></form>
-			</td>
-		</tr>
-		<% } %>
-   		 
-   		 <tr><td><a href="/urls/new"> Make A New Short URL! </a></td></tr>
-   		 
-  	</table>
-
+<h3><a href="/urls/new"> Make A New Short URL! </a></h3>
 
 
 </body>

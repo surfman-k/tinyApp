@@ -7,25 +7,27 @@
 <h1>
 	Welcome to TinyApp!	
 </h1>
+
+<form method="GET" action="/login">
+	<h3><%= user %> <button type="submit">Login</button></h3>
+</form>
+<form method="GET" action="/register">
+	<h3><%= user %> <button type="submit">Register</button></h3>
+</form>
+
+
 <% } else {%>
 <h1>
 	Welcome back to TinyApp <%= user %>!	
 </h1>
-<% } %>
-
-<% if(!user) {%>
-
-<form method="POST" action="/login">
-	<input id="username" type="text" name="username" placeholder="username" style="width: 300px">
-	<button type="submit">Submit</button>
-	<h2><%= user %></h2>
-</form>
-
-<% } else {%>
 
 <form method="POST" action="/logout">
 	<h3><%= user %> <button type="submit">Logout</button></h3>
 </form>
 
-
 <% } %>
+
+
+
+
+

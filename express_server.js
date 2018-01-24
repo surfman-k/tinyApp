@@ -54,9 +54,13 @@ app.get("/urls/:id", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-	let templateVars = { urls: urlDatabase,
-	user: users[req.cookies.userid] };
+	let templateVars = {user: users[req.cookies.userid] };
 	res.render("urls_reg", templateVars);
+});
+
+app.get("/login", (req, res) => {
+	let templateVars = { user: users };
+	res.render("urls_login", templateVars);
 });
 
 app.post("/urls", (req, res) => {
@@ -79,21 +83,28 @@ app.post("/urls/:id", (req, res) => {
 });
 
 app.post("/login", (req, res) => { 
-	res.cookie('name', req.body.username);
-	console.log(req.cookies);
-	res.redirect('http://localhost:8080/urls/');  
+	for (let key in users){
+		if(users[key].email === req.body.email){
+			res.cookie('userid', users[key].id);
+			res.redirect('http://localhost:8080/urls/');
+		}
+		else{
+			res.status(400).send({ error: 'Make sure you enter a valid email!' });
+		}
+	}  
 });
 
 app.post("/logout", (req, res) => { 
-	res.clearCookie('name');
+	res.clearCookie('userid');
 	console.log(req.cookies);
-	res.redirect('http://localhost:8080/urls/');  
+	res.redirect('http://localhost:8080/login/');  
 });
 
 app.post("/register", (req, res) => { 
 	for (let key in users){
 		if(req.body.email === users[key].email){
 			res.status(400).send({ error: 'That email address is already registered!' });
+			break;
 		}
 	}
 	if(req.body.email.length === 0){
