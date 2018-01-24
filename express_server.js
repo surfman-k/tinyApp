@@ -13,21 +13,27 @@ let urlDatabase = {
 	"9sm5xK": "http://www.google.com"
 };
 
+app.get('/', function (req, res) {
+  console.log('Cookies: ', req.cookies);
+});
+
 app.get("/", (req, res) => {
 	res.end("Hello!");
 });
 
 app.get("/urls", (req, res) => {
-	let templateVars = { urls: urlDatabase };
+	let templateVars = { urls: urlDatabase,
+	username: req.cookies.name };
 	res.render("urls_index", templateVars);
 });
 
 app.get("/urls/new", (req, res) => {
-	res.render("urls_new");
+	let templateVars = { username: req.cookies.name };
+	res.render("urls_new", templateVars);
 });
 
 app.get("/urls/:id", (req, res) => {
-	let templateVars = { shortURL: req.params.id, fullURL: urlDatabase[req.params.id] };
+	let templateVars = { shortURL: req.params.id, fullURL: urlDatabase[req.params.id], username: req.cookies.name  };
 	res.render("urls_show", templateVars);
 });
 
@@ -46,6 +52,12 @@ app.post("/urls/:id/delete", (req, res) => {
 app.post("/urls/:id", (req, res) => { 
 	urlDatabase[req.params.id] = req.body.currentURL;
 	console.log(urlDatabase);
+	res.redirect('http://localhost:8080/urls/');  
+});
+
+app.post("/login", (req, res) => { 
+	res.cookie('name', req.body.username);
+	console.log(req.cookies);
 	res.redirect('http://localhost:8080/urls/');  
 });
 
@@ -68,5 +80,4 @@ function generateRandomString() {
 	}
 	return(result);
 }
-
 let uniqueId = generateRandomString();
