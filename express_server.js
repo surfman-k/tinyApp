@@ -4,8 +4,10 @@ const PORT = process.env.PORT || 8080; // default port 8080
 const bodyParser = require("body-parser");
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
+const methodOverride = require('method-override');
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 app.use(cookieSession({
 	name: 'session',
   	keys: ['key1', 'key2'],
@@ -102,7 +104,7 @@ app.post("/urls", (req, res) => {
 	res.redirect('http://localhost:8080/urls/');  
 });
 
-app.post("/urls/:id/delete", (req, res) => { 
+app.delete("/urls/:id/", (req, res) => { 
 	if(urlDatabase[req.params.id].userID !== req.session.userid){
 		res.redirect('http://localhost:8080/urls/');
 	} else{
@@ -112,7 +114,7 @@ app.post("/urls/:id/delete", (req, res) => {
 	}  
 });
 
-app.post("/urls/:id", (req, res) => { 
+app.put("/urls/:id", (req, res) => { 
 	if(urlDatabase[req.params.id].userID !== req.session.userid){
 		res.redirect('http://localhost:8080/urls/');
 	} else{

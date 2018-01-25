@@ -11,7 +11,7 @@
 
 
 	<h2> ShortURL: <%= shortURL %> </h2>
-	<form method="POST" action="/urls/<%= shortURL%>">
+	<form method="POST" action="/urls/<%= shortURL%>?_method=PUT">
 		<input id="currentURL" type="text" name="currentURL" placeholder="<%= fullURL%>" style="width: 300px">
 		<button type="submit">Update</button>
 	</form>

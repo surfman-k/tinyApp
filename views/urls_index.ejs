@@ -27,7 +27,7 @@ window.alert('Please login or register first!');
 	<form method="GET" action="/urls/<%= key %>/">
 		<button href="/urls/<%= key %>" type="submit"> Update </button>
 	</form>
-	<form method="POST" action="/urls/<%= key %>/delete">
+	<form method="POST" action="/urls/<%= key %>?_method=DELETE">
 		<button type="submit">Delete</button>
 	</form>
 	
