@@ -80,15 +80,23 @@ app.post("/urls", (req, res) => {
 });
 
 app.post("/urls/:id/delete", (req, res) => { 
-	delete urlDatabase[req.params.id];
-	console.log(urlDatabase);
-	res.redirect('http://localhost:8080/urls/');  
+	if(urlDatabase[req.params.id].userID !== req.cookies.userid){
+		res.redirect('http://localhost:8080/urls/');
+	} else{
+		delete urlDatabase[req.params.id];
+		console.log(urlDatabase);
+		res.redirect('http://localhost:8080/urls/');
+	}  
 });
 
 app.post("/urls/:id", (req, res) => { 
-	urlDatabase[req.params.id].longURL = req.body.currentURL;
-	console.log(urlDatabase);
-	res.redirect('http://localhost:8080/urls/');  
+	if(urlDatabase[req.params.id].userID !== req.cookies.userid){
+		res.redirect('http://localhost:8080/urls/');
+	} else{
+		urlDatabase[req.params.id].longURL = req.body.currentURL;
+		console.log(urlDatabase);
+		res.redirect('http://localhost:8080/urls/');  
+	}  
 });
 
 app.post("/login", (req, res) => { 
