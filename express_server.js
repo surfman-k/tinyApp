@@ -2,12 +2,10 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8080; // default port 8080
 const bodyParser = require("body-parser");
-//const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 
 app.use(bodyParser.urlencoded({extended: true}));
-//app.use(cookieParser());
 app.use(cookieSession({
 	name: 'session',
   	keys: ['key1', 'key2'],
@@ -41,7 +39,6 @@ function urlsForUser(id){
 			personalURLs[id][key] = urlDatabase[key];
 		}
 	}
-	//console.log(personalURLs);
 }
 
 
@@ -98,12 +95,10 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/urls", (req, res) => {
-	//console.log(urlDatabase);
 	let uniqueId = generateRandomString();
 	urlDatabase[uniqueId] = {};
 	urlDatabase[uniqueId].longURL = req.body.longURL;
 	urlDatabase[uniqueId].userID = req.session.userid;
-	//console.log(urlDatabase);
 	res.redirect('http://localhost:8080/urls/');  
 });
 
@@ -130,7 +125,6 @@ app.post("/urls/:id", (req, res) => {
 app.post("/login", (req, res) => { 
 	for (let key in users){
 		if(req.body.email === users[key].email && bcrypt.compareSync(req.body.password, users[key].password)){
-			//console.log(users);
 			req.session.userid = users[key].id;
 			res.redirect('http://localhost:8080/urls/');
 		}	
@@ -165,7 +159,6 @@ app.post("/register", (req, res) => {
 	users[uniqueId].password = bcrypt.hashSync(passwordToHash, 10);
 	req.session.userid = uniqueId;
 	console.log(req.session.userid);
-	//console.log(users);
 	res.redirect('http://localhost:8080/urls/');  
 	}
 });
