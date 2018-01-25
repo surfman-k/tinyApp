@@ -1,7 +1,8 @@
+<head>
 <title>
     TinyApp!
 </title>
-
+</head>
 
 <% if(!user) {%>
 <h1>
@@ -18,7 +19,7 @@
 
 <% } else {%>
 <h1>
-	Welcome back to TinyApp <%= user %>!	
+	Welcome back to TinyApp <%= user.id %>!	
 </h1>
 
 <form method="POST" action="/logout">

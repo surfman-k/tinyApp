@@ -59,7 +59,7 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-	let templateVars = { user: users };
+	let templateVars = { user: users[req.cookies.userid] };
 	res.render("urls_login", templateVars);
 });
 
