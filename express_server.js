@@ -26,6 +26,18 @@ const users = {
   }
 };
 
+const personalURLs = {};
+
+function urlsForUser(id){
+	for(let key in urlDatabase){
+		if(urlDatabase[key].userID === id){
+			personalURLs[id] = {};
+			personalURLs[id][key] = urlDatabase[key];
+		}
+	}
+	console.log(personalURLs);
+}
+
 app.get('/', function (req, res) {
   console.log('Cookies: ', req.cookies);
 });
@@ -39,7 +51,9 @@ app.get("/urls", (req, res) => {
 		let templateVars = {user: users[req.cookies.userid], loggedin : false};
 		res.render("urls_login", templateVars);
 	} else{
-		let templateVars = { urls: urlDatabase,
+		console.log(urlsForUser(req.cookies.userid));
+		console.log(personalURLs);
+		let templateVars = { urls: personalURLs[req.cookies.userid],
 		user: users[req.cookies.userid] };
 		res.render("urls_index", templateVars);
 	}
@@ -71,7 +85,7 @@ app.get("/urls/:id", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-	let templateVars = {user: users[req.cookies.userid] };
+	let templateVars = {user: users[req.cookies.userid], loggedin: true };
 	res.render("urls_reg", templateVars);
 });
 
