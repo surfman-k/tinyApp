@@ -13,6 +13,12 @@ form {
 <% include ./partials/_header %>
 </header>
 
+<% if(!user){ %> 
+<script>
+window.alert('Please login or register first!');
+</script>
+
+<% } %>
 
 <% for(let key in urls){%>
 

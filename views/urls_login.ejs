@@ -4,11 +4,21 @@
   <body style="font-size:20px; padding:50px;">
     <% include partials/_header %>
     <form action="/login" method="POST">
+      <label > Welcome Back! Please enter your login information: </label></br></br>
       <label for="email">Enter your email address:</label>
       <input id="email" type="email" name="email" placeholder="email@example.com" style="width: 300px"></br>
       <label for="email">Enter your password:</label>
-      <input id="password" type="password" name="password" placeholder="password" style="width: 300px"></br>
+      <input id="password" type="password" name="password" placeholder="password" style="width: 300px"></br></br>
       <input type="submit" value="Submit">
     </form>
+
+<% if(loggedin === false){ %>
+<script>
+window.alert('Please login or register first!');
+</script>
+<%}%>
+
+
+
   </body>
 </html>

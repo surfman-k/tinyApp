@@ -35,14 +35,20 @@ app.get("/", (req, res) => {
 });
 
 app.get("/urls", (req, res) => {
-	let templateVars = { urls: urlDatabase,
-	user: users[req.cookies.userid] };
-	res.render("urls_index", templateVars);
+	if(!req.cookies.userid){
+		let templateVars = {user: users[req.cookies.userid], loggedin : false};
+		res.render("urls_login", templateVars);
+	} else{
+		let templateVars = { urls: urlDatabase,
+		user: users[req.cookies.userid] };
+		res.render("urls_index", templateVars);
+	}
 });
 
 app.get("/urls/new", (req, res) => {
 	if(!users[req.cookies.userid]){
-	res.redirect('http://localhost:8080/login/');
+		let templateVars = {user: users[req.cookies.userid], loggedin : false};
+		res.render("urls_login", templateVars);
 	}
 	else{
 	let templateVars = { urls: urlDatabase,
@@ -52,11 +58,16 @@ app.get("/urls/new", (req, res) => {
 });
 
 app.get("/urls/:id", (req, res) => {
-	let templateVars = { 
+	if(!req.cookies.userid){
+		let templateVars = {user: users[req.cookies.userid], loggedin : false};
+		res.render("urls_login", templateVars);
+	} else{
+		let templateVars = { 
 		shortURL: req.params.id, 
 		fullURL: urlDatabase[req.params.id].longURL, 
 		user: users[req.cookies.userid]   };
 	res.render("urls_show", templateVars);
+	}
 });
 
 app.get("/register", (req, res) => {
@@ -65,7 +76,7 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-	let templateVars = { user: users[req.cookies.userid] };
+	let templateVars = { user: users[req.cookies.userid], loggedin: true };
 	res.render("urls_login", templateVars);
 });
 
@@ -160,3 +171,4 @@ function generateRandomString() {
 	}
 	return(result);
 }
+
