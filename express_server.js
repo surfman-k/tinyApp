@@ -41,8 +41,13 @@ app.get("/urls", (req, res) => {
 });
 
 app.get("/urls/new", (req, res) => {
+	if(!users[req.cookies.userid]){
+	res.redirect('http://localhost:8080/login/');
+	}
+	else{
 	let templateVars = { user: users[req.cookies.userid]  };
 	res.render("urls_new", templateVars);
+	}
 });
 
 app.get("/urls/:id", (req, res) => {
@@ -67,7 +72,7 @@ app.post("/urls", (req, res) => {
 	let uniqueId = generateRandomString();
 	urlDatabase[uniqueId] = req.body.longURL;
 	console.log(urlDatabase);
-	res.redirect('http://localhost:8080/urls/' + uniqueId);  
+	res.redirect('http://localhost:8080/urls/');  
 });
 
 app.post("/urls/:id/delete", (req, res) => { 

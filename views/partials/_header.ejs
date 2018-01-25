@@ -2,6 +2,13 @@
 <title>
     TinyApp!
 </title>
+
+ <style>
+form {
+    display: inline;
+}
+</style>
+
 </head>
 
 <% if(!user) {%>
@@ -10,11 +17,14 @@
 </h1>
 
 <form method="GET" action="/login">
-	<h3><%= user %> <button type="submit">Login</button></h3>
+	<button type="submit">Login</button>
 </form>
 <form method="GET" action="/register">
-	<h3><%= user %> <button type="submit">Register</button></h3>
+	<button type="submit">Register</button>
 </form>
+</br>
+</br>
+</br>
 
 
 <% } else {%>
