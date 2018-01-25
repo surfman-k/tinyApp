@@ -84,19 +84,17 @@ app.post("/urls/:id", (req, res) => {
 
 app.post("/login", (req, res) => { 
 	for (let key in users){
-		if(users[key].email === req.body.email){
+		if(req.body.email === users[key].email && req.body.password === users[key].password){
+			console.log(users);
 			res.cookie('userid', users[key].id);
 			res.redirect('http://localhost:8080/urls/');
-		}
-		else{
-			res.status(400).send({ error: 'Make sure you enter a valid email!' });
-		}
-	}  
+		}	
+	}
+	res.status(403).send({ error: 'Please verify your credentials!' });  
 });
 
 app.post("/logout", (req, res) => { 
 	res.clearCookie('userid');
-	console.log(req.cookies);
 	res.redirect('http://localhost:8080/login/');  
 });
 
