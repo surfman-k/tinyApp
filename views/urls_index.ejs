@@ -16,7 +16,7 @@ form {
 
 <% for(let key in urls){%>
 
-	<%= urls[key] %>
+	<%= urls[key].longURL %>
 	<a href="/u/<%= key %>"> <%= key %> </a> 
 	<form method="GET" action="/urls/<%= key %>/">
 		<button href="/urls/<%= key %>" type="submit"> Update </button>

@@ -9,8 +9,8 @@ app.use(cookieParser());
 app.set("view engine", "ejs");
 
 const urlDatabase = {
-	"b2xVn2": "http://www.lighthouselabs.ca",
-	"9sm5xK": "http://www.google.com"
+	"b2xVn2": {longURL: "http://www.lighthouselabs.ca", userID: "userRandomID"},
+	"9sm5xK": {longURL: "http://www.google.com", userID: "user2RandomID"}
 };
 
 const users = { 
@@ -45,7 +45,8 @@ app.get("/urls/new", (req, res) => {
 	res.redirect('http://localhost:8080/login/');
 	}
 	else{
-	let templateVars = { user: users[req.cookies.userid]  };
+	let templateVars = { urls: urlDatabase,
+		user: users[req.cookies.userid]  };
 	res.render("urls_new", templateVars);
 	}
 });
@@ -53,7 +54,7 @@ app.get("/urls/new", (req, res) => {
 app.get("/urls/:id", (req, res) => {
 	let templateVars = { 
 		shortURL: req.params.id, 
-		fullURL: urlDatabase[req.params.id], 
+		fullURL: urlDatabase[req.params.id].longURL, 
 		user: users[req.cookies.userid]   };
 	res.render("urls_show", templateVars);
 });
@@ -69,8 +70,11 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/urls", (req, res) => {
+	console.log(urlDatabase);
 	let uniqueId = generateRandomString();
-	urlDatabase[uniqueId] = req.body.longURL;
+	urlDatabase[uniqueId] = {};
+	urlDatabase[uniqueId].longURL = req.body.longURL;
+	urlDatabase[uniqueId].userID = req.cookies.userid;
 	console.log(urlDatabase);
 	res.redirect('http://localhost:8080/urls/');  
 });
@@ -82,7 +86,7 @@ app.post("/urls/:id/delete", (req, res) => {
 });
 
 app.post("/urls/:id", (req, res) => { 
-	urlDatabase[req.params.id] = req.body.currentURL;
+	urlDatabase[req.params.id].longURL = req.body.currentURL;
 	console.log(urlDatabase);
 	res.redirect('http://localhost:8080/urls/');  
 });
@@ -130,7 +134,7 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/u/:shortURL", (req, res) => {
-  let longURL = urlDatabase[req.params.shortURL];
+  let longURL = urlDatabase[req.params.shortURL].longURL;
   console.log(longURL);
   res.redirect(longURL);
 });
