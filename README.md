@@ -16,7 +16,7 @@ A fullstack (built with Node and Express) web app that shortens a given url.
 * [body-parser](https://www.npmjs.com/package/body-parser)
 * [cookie-session](https://github.com/expressjs/cookie-session)
 * [bcrypt](https://www.npmjs.com/package/bcrypt)
-* [method-override(https://www.npmjs.com/package/express-method-override)
+* [method-override](https://www.npmjs.com/package/express-method-override)
 * [MomentJS](https://momentjs.com/)
 
 
