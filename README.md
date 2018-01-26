@@ -1,24 +1,22 @@
 # TinyApp
 
-A fullstack web app that shortens a given url
+A fullstack (built with Node and Express) web app that shortens a given url.
 
 ## Getting Started
 
-
-### Prerequisites
-
-
-### Installing
+-Install all dependencies (using the `npm istall` command).
+-Run the development web server using the `node express_server.js` command.
 
 
-## Running the tests
-
-
-## Built With
+## Built With and Dependecies
 
 * [NodeJS](https://nodejs.org/en/)
 * [ExpressJS](https://maven.apache.org/) 
 * [EJS](https://rometools.github.io/rome/)
-* [MongoDB](https://www.mongodb.com/)
+* [body-parser](https://www.npmjs.com/package/body-parser)
+* [cookie-session](https://github.com/expressjs/cookie-session)
+* [bcrypt](https://www.npmjs.com/package/bcrypt)
+* [method-override(https://www.npmjs.com/package/express-method-override)
+* [MomentJS](https://momentjs.com/)
 
 

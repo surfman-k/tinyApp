@@ -20,6 +20,7 @@
 <% include ./partials/_header %>
 </header>
 
+
 <% if(!user){ %> 
 <script>
 window.alert('Please login or register first!');
@@ -28,9 +29,9 @@ window.alert('Please login or register first!');
 <% } %>
 
 <% for(let key in urls){%>
-	
+	</br></br>
 	<h3 class="urlindex"><%= urls[key].longURL %> &nbsp;&nbsp;    
-	<a class="urlindex" id="click" href="/u/<%= key %>"> <%= key %> </a> </h3>
+	<a class="urlindex" id="click" href="/u/<%= key %>"> localhost:<%=PORT%>/u/<%= key %> </a> </h3>
 	<div class="buttonsURL">
 	<form method="GET" action="/urls/<%= key %>/">
 		<button href="/urls/<%= key %>" type="submit"> Update </button>
