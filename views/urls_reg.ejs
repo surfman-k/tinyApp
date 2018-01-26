@@ -1,14 +1,28 @@
 <html lang="en">
-  <head></head>
+  <head>
+    
+<style>
+form {
+    
+    float: center;
+}
+
+.loginform{
+  float: center;
+  text-align: center;
+}
+  </style>
+
+  </head>
   <body style="font-size:20px; padding:50px;">
     <% include partials/_header %>
-    <form action="/register" method="POST">
-      <label > Welcome to TinyApp! Please create your account here: </label></br></br>
-      <label for="email">Enter an email address:</label>
-      <input id="email" type="email" name="email" placeholder="email@example.com" style="width: 300px"></br>
-      <label for="email">Enter a password:</label>
+    <form class="loginform" action="/register" method="POST">
+      <label > Welcome to TinyApp! </br> Please create your account here: </label></br></br>
+      <label for="email">Enter an email address:</label></br>
+      <input id="email" type="email" name="email" placeholder="email@example.com" style="width: 300px"></br></br>
+      <label for="email">Enter a password:</label></br>
       <input id="password" type="password" name="password" placeholder="password" style="width: 300px"></br></br>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" style="width: 150px">
     </form>
   </body>
 </html>

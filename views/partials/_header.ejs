@@ -4,22 +4,36 @@
 </title>
 
  <style>
+
 form {
-    display: inline;
+    
+    float: center;
 }
+
+.login{
+	float: right;
+	margin-top: -35px;
+}
+
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
 </style>
 
 </head>
 
 <% if(!user) {%>
 <h1>
-	Welcome to TinyApp!	
+	TinyApp!	
 </h1>
 
-<form method="GET" action="/login">
+<form class="login" method="GET" action="/login">
 	<button type="submit">Login</button>
 </form>
-<form method="GET" action="/register">
+<form class="login" method="GET" action="/register">
 	<button type="submit">Register</button>
 </form>
 </br>
@@ -29,13 +43,13 @@ form {
 
 <% } else {%>
 <h1>
-	Welcome back to TinyApp <%= user.id %>!	
+	TinyApp!	
 </h1>
 
-<form method="POST" action="/logout">
-	<h3><%= user.id %> <button type="submit">Logout</button></h3>
+<form class="login" method="POST" action="/logout">
+	<h3><button type="submit">Logout</button></h3>
 </form>
-
+</br></br>
 <% } %>
 
 

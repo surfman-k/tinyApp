@@ -2,9 +2,16 @@
 <head>
   <title>TinyApp</title>
  <style>
-form {
-    display: inline;
+.urlindex{
+	text-align: center;
 }
+
+.buttonsURL{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
 </style>
 </head>
 <body>
@@ -21,20 +28,22 @@ window.alert('Please login or register first!');
 <% } %>
 
 <% for(let key in urls){%>
-
-	<%= urls[key].longURL %>
-	<a href="/u/<%= key %>"> <%= key %> </a> 
+	
+	<h3 class="urlindex"><%= urls[key].longURL %> &nbsp;&nbsp;    
+	<a class="urlindex" href="/u/<%= key %>"> <%= key %> </a> </h3>
+	<div class="buttonsURL">
 	<form method="GET" action="/urls/<%= key %>/">
 		<button href="/urls/<%= key %>" type="submit"> Update </button>
 	</form>
 	<form method="POST" action="/urls/<%= key %>?_method=DELETE">
 		<button type="submit">Delete</button>
 	</form>
+	</div>
 	
-	</br></br>
+	
 <% } %>
 
-<h3><a href="/urls/new"> Make A New Short URL! </a></h3>
+<h3 class="urlindex" ><a href="/urls/new"> Make A New Short URL! </a></h3>
 
 
 </body>
