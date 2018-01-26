@@ -25,7 +25,8 @@
 
 
 	<h2 class="showURL"> ShortURL: <%= shortURL %> </h2>
-	<h4>Visited <%= visit %> times</h4>
+	<h4>Visits: <%= visit %></h4>
+	<h4>Unique Visits: <%= uniqueVisit %></h4>
 	<form class="showURL" method="POST" action="/urls/<%= shortURL%>?_method=PUT">
 		<input id="currentURL" type="text" name="currentURL" placeholder="<%= fullURL%>" style="width: 300px">
 		<button type="submit">Update</button>
