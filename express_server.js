@@ -135,7 +135,7 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/logout", (req, res) => { 
-	req.session = null;
+	req.session.userid = null;
 	res.redirect('http://localhost:8080/login/');  
 });
 
@@ -167,7 +167,10 @@ app.post("/register", (req, res) => {
 
 app.get("/u/:shortURL", (req, res) => {
   let longURL = urlDatabase[req.params.shortURL].longURL;
-  console.log(longURL);
+  $("#target").click(function() {
+  alert( "Handler for .click() called." );
+  });
+  req.session.visits = "visited";
   res.redirect(longURL);
 });
 
