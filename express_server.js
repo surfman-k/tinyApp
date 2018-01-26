@@ -45,7 +45,7 @@ function urlsForUser(id){
 
 
 app.get("/", (req, res) => {
-	res.end("Hello!");
+	res.redirect("/register");
 });
 
 app.get("/urls", (req, res) => {
@@ -81,7 +81,8 @@ app.get("/urls/:id", (req, res) => {
 		let templateVars = { 
 		shortURL: req.params.id, 
 		fullURL: urlDatabase[req.params.id].longURL, 
-		user: users[req.session.userid]   };
+		user: users[req.session.userid],
+		visit: req.session[req.params.id]   };
 	res.render("urls_show", templateVars);
 	}
 });
@@ -167,10 +168,13 @@ app.post("/register", (req, res) => {
 
 app.get("/u/:shortURL", (req, res) => {
   let longURL = urlDatabase[req.params.shortURL].longURL;
-  $("#target").click(function() {
-  alert( "Handler for .click() called." );
-  });
-  req.session.visits = "visited";
+  if(!req.session[req.params.shortURL]){
+  	req.session[req.params.shortURL] = 1;
+  } else {
+  req.session[req.params.shortURL] += 1;
+  }
+  console.log(req.session);
+
   res.redirect(longURL);
 });
 
