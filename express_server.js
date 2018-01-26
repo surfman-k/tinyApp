@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
+const moment = require('moment');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
@@ -83,7 +84,9 @@ app.get("/urls/:id", (req, res) => {
 		fullURL: urlDatabase[req.params.id].longURL, 
 		user: users[req.session.userid],
 		visit: req.session[req.params.id].visits,
-		uniqueVisit: req.session[req.params.id].uniqueUsers.length   };
+		uniqueVisit: req.session[req.params.id].uniqueUsers.length ,
+		timeStamps: req.session[req.params.id].timeStamp
+		};
 	res.render("urls_show", templateVars);
 	}
 });
@@ -170,17 +173,15 @@ app.post("/register", (req, res) => {
 app.get("/u/:shortURL", (req, res) => {
   let longURL = urlDatabase[req.params.shortURL].longURL;
   if(!req.session[req.params.shortURL]){
-  	req.session[req.params.shortURL] = {visits: 1, uniqueUsers: [req.session.userid]};
+  	req.session[req.params.shortURL] = {visits: 1, uniqueUsers: [req.session.userid], timeStamp: [{time: moment(Date.now()).subtract(5, 'hours').format("dddd, MMMM Do YYYY, h:mm:ss a"), viewedBy: req.session.userid}] };
   } else {
   	req.session[req.params.shortURL].visits += 1;
+  	req.session[req.params.shortURL].timeStamp.push({time: moment(Date.now()).subtract(5, 'hours').format("dddd, MMMM Do YYYY, h:mm:ss a"), viewedBy: req.session.userid}); 
   	if(req.session[req.params.shortURL].uniqueUsers.indexOf(req.session.userid) < 0){
   	  req.session[req.params.shortURL].uniqueUsers.push(req.session.userid);
   	}
   }
-  // if(!req.session[req.params.shortURL][uniqueVis]){
-  // 	req.session[req.params.shortURL][uniqueVis] = req.session.userid;
-  // } 
-  console.log(req.session);
+  console.log(req.session[req.params.shortURL]);
 
   res.redirect(longURL);
 });

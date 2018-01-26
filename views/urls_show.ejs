@@ -12,6 +12,10 @@
 	h4{
 		text-align: center;
 	}
+
+	h5{
+		text-align: center;
+	}
   </style>
 
 
@@ -33,7 +37,18 @@
 	</form>
 
 
-	<form action="/urls">
+	<% for(var i = 0; i < timeStamps.length; i++){ 
+		var tiempo = timeStamps[i].time %>
+
+		<h5> Viewed at: <%= tiempo %> by: <%= timeStamps[i].viewedBy %> </h5>
+
+	<%}%>
+
+
+
+
+
+	<form class="showURL" action="/urls">
     <input type="submit" value="Back to Index" />
 	</form>
 
