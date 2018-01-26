@@ -20,3 +20,8 @@ A fullstack (built with Node and Express) web app that shortens a given url.
 * [MomentJS](https://momentjs.com/)
 
 
+## Final Product 
+
+!["Screenshot of Registration Page"](https://github.com/surfman-k/tinyApp/blob/master/docs/reg.png?raw=true)
+!["Screenshot of URL Index Page"](https://github.com/surfman-k/tinyApp/blob/master/docs/url-index.png?raw=true)
+!["Screenshot of URL Edit Page and Tracking Cookies"](https://github.com/surfman-k/tinyApp/blob/master/docs/timestamps.png?raw=true)
