@@ -28,7 +28,8 @@
 </header>
 
 	</br></br>
-	<h2 class="showURL"> ShortURL: <%= shortURL %> </h2>
+	<h2 class="showURL"><%= fullURL %> </h2>
+	<h2 class="showURL">ShortURL: <a href="/u/"> localhost:<%=PORT%>/u/ <%= shortURL %> </a> </h2>
 	<h4>Visits: <%= visit %></h4>
 	<h4>Unique Visits: <%= uniqueVisit %></h4>
 	<form class="showURL" method="POST" action="/urls/<%= shortURL%>?_method=PUT">
