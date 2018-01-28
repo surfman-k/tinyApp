@@ -8,6 +8,8 @@ const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const moment = require('moment');
 
+
+app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
     extended: true
@@ -169,6 +171,14 @@ app.put("/urls/:id", (req, res) => {
         res.redirect('http://localhost:8080/urls/');
     } else {
         urlDatabase[req.params.id].longURL = req.body.currentURL;
+        req.session[req.params.id] = {
+            visits: 0,
+            uniqueUsers: [],
+            timeStamp: [{
+                time: moment(Date.now()).subtract(5, 'hours').format("dddd, MMMM Do YYYY, h:mm:ss a"),
+                viewedBy: "Created Short Link"
+            }]
+        };
         res.redirect('http://localhost:8080/urls/');
     }
 });
