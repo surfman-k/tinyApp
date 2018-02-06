@@ -4,7 +4,7 @@ A fullstack (built with Node and Express) web app that shortens a given url.
 
 ## Getting Started
 
--Install all dependencies (using the `npm istall` command).
+-Install all dependencies (using the `npm install` command).
 -Run the development web server using the `node express_server.js` command.
 
 
