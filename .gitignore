@@ -1,0 +1,7 @@
+package-lock.json
+.DS_Store
+.jshintrc
+docs/.DS_Store
+node_modules/
+views/.DS_Store
+views/partials/.DS_Store
